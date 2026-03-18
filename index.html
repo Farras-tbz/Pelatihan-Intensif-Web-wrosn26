@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelatihan Intensif @wrosn26</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sky-blue: #87CEEB;
+            --light-sky: #B0E0E6;
+            --deep-sky: #00BFFF;
+            --white: #FFFFFF;
+            --cloud-white: rgba(255, 255, 255, 0.9);
+            --text-dark: #2C3E50;
+            --accent-orange: #FF6B6B;
+            --accent-yellow: #FFE66D;
+            --success-green: #4ECDC4;
+        }
+
+        body {
+            font-family: 'Nunito', 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(180deg, 
+                #87CEEB 0%, 
+                #98D8E8 30%,
+                #B0E0E6 60%,
+                #E0F6FF 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Clouds Background */
+        .clouds-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: var(--cloud-white);
+            border-radius: 100px;
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: var(--cloud-white);
+            border-radius: 100px;
+        }
+
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: var(--cloud-white);
+            border-radius: 100px;
+        }
+
+        /* Cloud 1 - Large slow */
+        .cloud1 {
+            width: 200px;
+            height: 60px;
+            top: 15%;
+            left: -200px;
+            animation: floatCloud 25s infinite linear;
+        }
+
+        .cloud1::before {
+            width: 100px;
+            height: 80px;
+            top: -40px;
+            left: 20px;
+        }
+
+        .cloud1::after {
+            width: 120px;
+            height: 60px;
+            top: -20px;
+            left: 80px;
+        }
+
+        /* Cloud 2 - Medium medium speed */
+        .cloud2 {
+            width: 160px;
+            height: 50px;
+            top: 35%;
+            left: -160px;
+            animation: floatCloud 20s infinite linear;
+            animation-delay: 5s;
+        }
+
+        .cloud2::before {
+            width: 80px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 100px;
+            height: 50px;
+            top: -15px;
+            left: 60px;
+        }
+
+        /* Cloud 3 - Small fast */
+        .cloud3 {
+            width: 120px;
+            height: 40px;
+            top: 60%;
+            left: -120px;
+            animation: floatCloud 15s infinite linear;
+            animation-delay: 10s;
+        }
+
+        .cloud3::before {
+            width: 60px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud3::after {
+            width: 80px;
+            height: 40px;
+            top: -10px;
+            left: 45px;
+        }
+
+        /* Cloud 4 - Large top */
+        .cloud4 {
+            width: 180px;
+            height: 55px;
+            top: 8%;
+            left: -180px;
+            animation: floatCloud 30s infinite linear;
+            animation-delay: 12s;
+        }
+
+        .cloud4::before {
+            width: 90px;
+            height: 70px;
+            top: -35px;
+            left: 18px;
+        }
+
+        .cloud4::after {
+            width: 110px;
+            height: 55px;
+            top: -18px;
+            left: 70px;
+        }
+
+        /* Cloud 5 - Medium bottom */
+        .cloud5 {
+            width: 140px;
+            height: 45px;
+            top: 75%;
+            left: -140px;
+            animation: floatCloud 22s infinite linear;
+            animation-delay: 3s;
+        }
+
+        .cloud5::before {
+            width: 70px;
+            height: 55px;
+            top: -28px;
+            left: 12px;
+        }
+
+        .cloud5::after {
+            width: 90px;
+            height: 45px;
+            top: -12px;
+            left: 55px;
+        }
+
+        @keyframes floatCloud {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(100vw + 300px));
+            }
+        }
+
+        /* Floating Animation for elements */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3em;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--deep-sky);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .handle {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-top: 10px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .pricing-header i {
+            color: var(--accent-orange);
+        }
+
+        .pricing-note-top {
+            background: linear-gradient(135deg, #FFE66D, #FFD93D);
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: 0 5px 15px rgba(255, 230, 109, 0.4);
+        }
+
+        /* Price List */
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .price-item:hover::before {
+            left: 100%;
+        }
+
+        .price-item:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--deep-sky);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+        }
+
+        .price-item.featured {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(255, 255, 255, 0.9));
+            border: 2px solid var(--success-green);
+            transform: scale(1.02);
+        }
+
+        .price-item.featured:hover {
+            transform: translateX(10px) scale(1.04);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+        }
+
+        .price-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-name i {
+            color: var(--deep-sky);
+            font-size: 1.2em;
+        }
+
+        .price-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4em;
+            font-weight: 800;
+            color: var(--accent-orange);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-item.featured .price-value {
+            color: var(--success-green);
+        }
+
+        /* Note Section */
+        .note-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 230, 109, 0.1));
+            border-left: 5px solid var(--accent-orange);
+            border-radius: 10px;
+            font-size: 0.95em;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .note-section strong {
+            color: var(--accent-orange);
+        }
+
+        /* Payment Section */
+        .payment-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .payment-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .payment-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .payment-btn:hover::before {
+            opacity: 1;
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-btn.ovo {
+            background: linear-gradient(135deg, #4c3494, #6b5ce7);
+        }
+
+        .payment-btn.dana {
+            background: linear-gradient(135deg, #008ceb, #00a8ff);
+        }
+
+        .payment-btn.gopay {
+            background: linear-gradient(135deg, #00aec5, #00d4e0);
+        }
+
+        .payment-btn img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .payment-btn span {
+            color: white;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-section {
+            margin-top: 20px;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2em;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.5em;
+        }
+
+        /* Sun Decoration */
+        .sun {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            animation: sunPulse 4s ease-in-out infinite;
+            z-index: 5;
+        }
+
+        @keyframes sunPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(255, 215, 0, 0.6); }
+            50% { transform: scale(1.1); box-shadow: 0 0 80px rgba(255, 215, 0, 0.8); }
+        }
+
+        /* Birds */
+        .bird {
+            position: fixed;
+            z-index: 5;
+            opacity: 0.6;
+        }
+
+        .bird1 {
+            top: 20%;
+            animation: flyBird 20s infinite linear;
+        }
+
+        .bird2 {
+            top: 30%;
+            animation: flyBird 25s infinite linear;
+            animation-delay: 5s;
+        }
+
+        @keyframes flyBird {
+            0% { left: -50px; }
+            100% { left: calc(100% + 50px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .pricing-section {
+                padding: 25px;
+            }
+            
+            .price-item {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .payment-btn {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .sun {
+                width: 60px;
+                height: 60px;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        /* Sparkle Animation */
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+            z-index: 2;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="clouds-container">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+        <div class="cloud cloud5"></div>
+    </div>
+
+    <div class="sun"></div>
+
+    <!-- Birds using Font Awesome -->
+    <div class="bird bird1">
+        <i class="fas fa-dove" style="color: white; font-size: 1.5em; transform: scaleX(-1);"></i>
+    </div>
+    <div class="bird bird2">
+        <i class="fas fa-crow" style="color: rgba(255,255,255,0.7); font-size: 1.2em; transform: scaleX(-1);"></i>
+    </div>
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 40%; left: 80%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 60%; left: 30%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="top: 80%; left: 70%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 30%; left: 50%; animation-delay: 1.5s;"></div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="main-title">PELATIHAN INTENSIF<br>OSN Matematika 2026</h1>
+            <div class="handle">@wrosn26</div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="pricing-section">
+            <div class="pricing-header">
+                <h2><i class="fas fa-tags"></i> Harga Pelatihan Intensif</h2>
+            </div>
+
+            <div class="pricing-note-top">
+                <i class="fas fa-info-circle"></i> Pelatihan Intensif dibayar <strong>PER BULAN</strong>
+            </div>
+
+            <div class="price-list">
+                <div class="price-item">
+                    <span class="price-name">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Pelatihan Intensif
+                    </span>
+                    <span class="price-value">Rp35.000</span>
+                </div>
+
+                <div class="price-item">
+                    <span class="price-name">
+                        <i class="fas fa-plus-circle"></i>
+                        Pelatihan Intensif + Sekali Try Out
+                    </span>
+                    <span class="price-value">Rp40.000</span>
+                </div>
+
+                <div class="price-item">
+                    <span class="price-name">
+                        <i class="fas fa-plus-circle"></i>
+                        Pelatihan Intensif + Dua Kali Try Out
+                    </span>
+                    <span class="price-value">Rp45.000</span>
+                </div>
+
+                <div class="price-item featured">
+                    <span class="price-name">
+                        <i class="fas fa-star"></i>
+                        Pelatihan Intensif + Tiga Kali Try Out
+                    </span>
+                    <span class="price-value">Rp50.000</span>
+                </div>
+
+                <div class="price-item">
+                    <span class="price-name">
+                        <i class="fas fa-plus-circle"></i>
+                        Pelatihan Intensif + Empat Kali Try Out
+                    </span>
+                    <span class="price-value">Rp55.000</span>
+                </div>
+
+                <div class="price-item">
+                    <span class="price-name">
+                        <i class="fas fa-plus-circle"></i>
+                        Pelatihan Intensif + Lima Kali Try Out
+                    </span>
+                    <span class="price-value">Rp60.000</span>
+                </div>
+            </div>
+
+            <div class="note-section">
+                <strong>📌 Catatan:</strong> Untuk Harga TryOut ketika di kombo dengan Pelatihan Intensif, harga TryOut menjadi <strong>Rp5.000 per TryOut</strong> (hemat dari harga normal Rp10.000!).
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <div class="payment-title">
+                <i class="fas fa-wallet"></i>
+                Aplikasi Pembayaran
+            </div>
+
+            <div class="payment-icons">
+                <div class="payment-btn ovo" onclick="openWhatsApp()">
+                    <span>OVO</span>
+                </div>
+                <div class="payment-btn dana" onclick="openWhatsApp()">
+                    <span>DANA</span>
+                </div>
+                <div class="payment-btn gopay" onclick="openWhatsApp()">
+                    <span>GoPay</span>
+                </div>
+            </div>
+
+            <div class="whatsapp-section">
+                <a href="https://chat.whatsapp.com/Eo8LkcddMgG3oWKGc9F9CE" target="_blank" class="whatsapp-btn" onclick="return confirm('Anda akan diarahkan ke grup WhatsApp. Lanjutkan?')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Hubungi via WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openWhatsApp() {
+            if (confirm('Anda akan diarahkan ke grup WhatsApp untuk pembayaran. Lanjutkan?')) {
+                window.open('https://chat.whatsapp.com/Eo8LkcddMgG3oWKGc9F9CE', '_blank');
+            }
+        }
+
+        // Add random sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 5000);
+        }
+
+        setInterval(createSparkle, 2000);
+
+        // Add hover effect sound (optional - visual feedback only)
+        document.querySelectorAll('.price-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px) scale(1.02)';
+            });
+        });
+    </script>
+</body>
+</html>'''
